@@ -11,7 +11,8 @@ public class ItemCaller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        data_container = GameObject.FindGameObjectWithTag("DataContainer");
+
         if (Serialization.DirectoryExists(Application.persistentDataPath + "/saves/savedgames/"
             + data_container.GetComponent<DataContainer>().saved_game_slot
             + "/" + SceneManager.GetActiveScene().name))

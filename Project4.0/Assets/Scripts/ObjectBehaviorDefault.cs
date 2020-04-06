@@ -7,11 +7,14 @@ public class ObjectBehaviorDefault : MonoBehaviour
 {
     public GameObject object_in_question, data_container;
     public SavedObject object_data;
-    public bool has_been_interacted, is_original;
+    private bool has_been_interacted, is_original;
     public float id;
 
     private void Awake()
     {
+        object_in_question = this.gameObject;
+        data_container = GameObject.FindGameObjectWithTag("DataContainer");
+
         GameEvents.current.SmartDelete += DestroyOrChange; // This must run before DeleteSmartly is called
     }
 
@@ -109,8 +112,6 @@ public class ObjectBehaviorDefault : MonoBehaviour
             + "/" + SceneManager.GetActiveScene().name
             + "/presentitems/" + this.gameObject.transform.position.sqrMagnitude + ".dat"))
         {
-            Debug.Log("Objectchanged");
-
             object_data = Serialization.Load<SavedObject>(Application.persistentDataPath + "/saves/savedgames/"
             + PlayerPrefs.GetString("saved_game_slot")
             + "/" + SceneManager.GetActiveScene().name
@@ -128,10 +129,13 @@ public class ObjectBehaviorDefault : MonoBehaviour
         }
         else
         {
-            Debug.Log(SceneManager.GetActiveScene().name);
-
             GameObject.Destroy(object_in_question);
         }
+    }
+
+    public void SetOriginality(bool isoriginal)
+    {
+        this.is_original = isoriginal;
     }
 
     public virtual void UseDefault(GameObject thing) { }
