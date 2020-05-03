@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
 
     public void Awake()
     {
+        character = GameObject.FindGameObjectWithTag("Player");
+
         if (Serialization.SaveExists(Application.persistentDataPath + "/saves/savedgames/" +
             PlayerPrefs.GetString("saved_game_slot") + "/game.dat"))
         {

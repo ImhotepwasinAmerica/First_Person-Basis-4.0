@@ -12,11 +12,19 @@ public class MirrorProbe : MonoBehaviour
     private float offset;
     private Vector3 probePos;
     private GameObject camera;
+    private ReflectionProbe probe;
 
     // Start is called before the first frame update
     void Start()
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+        probe = this.GetComponent<ReflectionProbe>();
+
+    }
+
+    void Update()
+    {
+        probe.RenderProbe();
     }
 
     // Update is called once per frame

@@ -1,0 +1,2 @@
+C:\Users\potis\Documents\GitHub\First_Person-Basis-4.0\Project4.0\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\potis\Documents\GitHub\First_Person-Basis-4.0\Project4.0\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

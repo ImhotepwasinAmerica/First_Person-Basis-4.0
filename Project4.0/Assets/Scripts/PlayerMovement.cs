@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public GameObject rotation_thing, data_container;
+    public GameObject rotation_thing, data_container, oneill;
     public float speed, jump_takeoff_speed, height_standing, height_squatting, lean_distance, distance_to_ground, speed_multiplier_squatting;
 
     private Vector3 velocity, velocity_endgoal;
@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         data_container = GameObject.FindGameObjectWithTag("DataContainer");
+        oneill = GameObject.FindGameObjectWithTag("OneillCenter");
 
         guy = data_container.GetComponent<DataContainer>().character;
 
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         angular_speed = Mathf.Sqrt((speed * speed / 2.0f));
 
         time_fake = 0.01666f;
-        gravity_fake = Physics.gravity.y * time_fake;
+        gravity_fake = (Physics.gravity.y * time_fake);
 
         lean = Quaternion.Euler(0,0,0);
 
@@ -52,24 +53,27 @@ public class PlayerMovement : MonoBehaviour
 
         Walk();
 
-        BetterMovement();
-
         ApplyGravity();
-
+        BetterMovement();
         Jump();
 
         CycaBlyat();
-
+        
         MovementLean();
-
+        
         ControlLean();
-
+        
         WalkRun();
 
         velocity_endgoal = transformation.rotation * velocity_endgoal;
 
         previous_grounded = current_grounded;
         current_grounded = IsGrounded();
+
+        if (oneill != null)
+        {
+            OneillTurn();
+        }
     }
 
     void FixedUpdate()
@@ -77,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
         velocity.x = Mathf.Lerp(velocity.x, velocity_endgoal.x, acceleration);
         velocity.z = Mathf.Lerp(velocity.z, velocity_endgoal.z, acceleration);
         velocity.y = velocity_endgoal.y;
+
+        
 
         // The velocity value shall be changed by standing on moving platforms
         // which shall be done here.
@@ -170,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(bottom, new Vector3(0, -1, 0), out hit, 1.5f)
+        if (Physics.Raycast(bottom, new Vector3(0, -1, 0), out hit, 0.5f)
             && !(Input.GetButton(PlayerPrefs.GetString("Jump")))
             && !Input.GetButtonDown(PlayerPrefs.GetString("Jump")))
         {
@@ -186,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsBeneathSomething()
     {
-        return Physics.Raycast(transform.position, Vector3.up, controller.height-distance_to_ground+0.3f);
+        return Physics.Raycast(transform.position, Vector3.up, (controller.height/2)+0.3f);
     }
 
     private void Jump()
@@ -323,5 +329,10 @@ public class PlayerMovement : MonoBehaviour
         {
             acceleration = 0.1f;
         }
+    }
+
+    private void OneillTurn()
+    {
+        //transformation.LookAt(new Vector3(transformation.position.x, oneill.transform.position.y,oneill.transform.position.z),Vector3.up);
     }
 }

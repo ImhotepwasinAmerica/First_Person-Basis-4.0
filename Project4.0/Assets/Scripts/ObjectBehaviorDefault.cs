@@ -12,7 +12,7 @@ public class ObjectBehaviorDefault : MonoBehaviour
 
     private void Awake()
     {
-        object_in_question = this.gameObject;
+        //object_in_question = this.gameObject;
         data_container = GameObject.FindGameObjectWithTag("DataContainer");
 
         GameEvents.current.SmartDelete += DestroyOrChange; // This must run before DeleteSmartly is called
