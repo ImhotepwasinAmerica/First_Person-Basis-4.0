@@ -8,21 +8,15 @@ public class SavedObject
 {
     public string saved_thing;
 
-    public string saved_thing_virtual;
-
-    public string ai_stage;
-
     public float rotation_x, rotation_y, rotation_z;
 
     public float position_x, position_y, position_z;
 
-    public int health, max_health, stack_count;
+    public List<int> ints;
 
-    public float weight;
+    public List<float> floats;
 
-    public bool invincible, switch_on, weapon_ammo_count;
+    public List<string> strings;
 
-    public ArrayList inventory;
-
-    public SavedObject[] toolbelt;
+    public List<SavedObject> objects;
 }

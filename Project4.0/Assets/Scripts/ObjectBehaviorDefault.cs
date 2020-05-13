@@ -72,11 +72,6 @@ public class ObjectBehaviorDefault : MonoBehaviour
         object_data = new SavedObject();
     }
 
-    public void HealthChange(int hit_strength)
-    {
-        object_data.health += hit_strength;
-    }
-
     public void Destroy()
     {
         GameObject.Destroy(object_in_question);

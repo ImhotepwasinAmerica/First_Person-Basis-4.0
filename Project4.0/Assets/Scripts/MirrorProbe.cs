@@ -24,7 +24,7 @@ public class MirrorProbe : MonoBehaviour
 
     void Update()
     {
-        probe.RenderProbe();
+
     }
 
     // Update is called once per frame

@@ -47,6 +47,39 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //data_container = GameObject.FindGameObjectWithTag("DataContainer");
+
+        //AlterAcceleration();
+
+        //Walk();
+
+        //ApplyGravity();
+
+        //BetterMovement();
+
+        //Jump();
+
+        //CycaBlyat();
+        
+        //MovementLean();
+        
+        //ControlLean();
+        
+        //WalkRun();
+
+        //velocity_endgoal = transformation.rotation * velocity_endgoal;
+
+        //previous_grounded = current_grounded;
+        //current_grounded = IsGrounded();
+
+        //if (oneill != null)
+        //{
+        //    OneillTurn();
+        //}
+    }
+
+    void FixedUpdate()
+    {
         data_container = GameObject.FindGameObjectWithTag("DataContainer");
 
         AlterAcceleration();
@@ -54,15 +87,17 @@ public class PlayerMovement : MonoBehaviour
         Walk();
 
         ApplyGravity();
+
         BetterMovement();
+
         Jump();
 
         CycaBlyat();
-        
+
         MovementLean();
-        
+
         ControlLean();
-        
+
         WalkRun();
 
         velocity_endgoal = transformation.rotation * velocity_endgoal;
@@ -74,16 +109,12 @@ public class PlayerMovement : MonoBehaviour
         {
             OneillTurn();
         }
-    }
 
-    void FixedUpdate()
-    {
+
         velocity.x = Mathf.Lerp(velocity.x, velocity_endgoal.x, acceleration);
         velocity.z = Mathf.Lerp(velocity.z, velocity_endgoal.z, acceleration);
         velocity.y = velocity_endgoal.y;
-
         
-
         // The velocity value shall be changed by standing on moving platforms
         // which shall be done here.
 
@@ -197,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown(PlayerPrefs.GetString("Jump"))
+        if (Input.GetButton(PlayerPrefs.GetString("Jump"))
             && IsGrounded())
         {
             velocity_endgoal.y += (jump_takeoff_speed * time_fake);
